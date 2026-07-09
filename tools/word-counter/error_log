@@ -1,0 +1,4 @@
+[02-May-2026 05:19:34 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function json_encode() in /home/banglatrick/tgdatahub.site/tools/word-counter/index.php:195
+Stack trace:
+#0 {main}
+  thrown in /home/banglatrick/tgdatahub.site/tools/word-counter/index.php on line 195

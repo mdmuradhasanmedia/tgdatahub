@@ -1,0 +1,3 @@
+[11-Dec-2025 14:01:12 UTC] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/banglatrick/tgdatahub.site/tools/heic-to-jpg/index.php on line 10
+[11-Dec-2025 14:01:12 UTC] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/banglatrick/tgdatahub.site/tools/heic-to-jpg/index.php on line 16
+[11-Dec-2025 14:01:12 UTC] PHP Deprecated:  trim(): Passing null to parameter #1 ($string) of type string is deprecated in /home/banglatrick/tgdatahub.site/tools/heic-to-jpg/index.php on line 19

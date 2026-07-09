@@ -1,0 +1,13 @@
+[17-Nov-2025 23:37:17 UTC] PHP Fatal error:  Uncaught Smalot\PdfParser\Exception\MissingPdfHeaderException: Invalid PDF data: Missing `%PDF-` header. in /home/banglatrick/tgdatahub.site/tools/pdf-to-word-converter/vendor/smalot/pdfparser/src/Smalot/PdfParser/RawData/RawDataParser.php:953
+Stack trace:
+#0 /home/banglatrick/tgdatahub.site/tools/pdf-to-word-converter/vendor/smalot/pdfparser/src/Smalot/PdfParser/Parser.php(103): Smalot\PdfParser\RawData\RawDataParser->parseData('<?php\r\neval(bas...')
+#1 /home/banglatrick/tgdatahub.site/tools/pdf-to-word-converter/vendor/smalot/pdfparser/src/Smalot/PdfParser/Parser.php(91): Smalot\PdfParser\Parser->parseContent('<?php\r\neval(bas...')
+#2 /home/banglatrick/tgdatahub.site/tools/pdf-to-word-converter/index.php(62): Smalot\PdfParser\Parser->parseFile('/tmp/phpZ7WfZC')
+#3 {main}
+  thrown in /home/banglatrick/tgdatahub.site/tools/pdf-to-word-converter/vendor/smalot/pdfparser/src/Smalot/PdfParser/RawData/RawDataParser.php on line 953
+[08-Feb-2026 05:00:22 UTC] PHP Fatal error:  Uncaught ValueError: Path cannot be empty in /home/banglatrick/tgdatahub.site/tools/pdf-to-word-converter/vendor/smalot/pdfparser/src/Smalot/PdfParser/Parser.php:79
+Stack trace:
+#0 /home/banglatrick/tgdatahub.site/tools/pdf-to-word-converter/vendor/smalot/pdfparser/src/Smalot/PdfParser/Parser.php(79): file_get_contents()
+#1 /home/banglatrick/tgdatahub.site/tools/pdf-to-word-converter/index.php(62): Smalot\PdfParser\Parser->parseFile()
+#2 {main}
+  thrown in /home/banglatrick/tgdatahub.site/tools/pdf-to-word-converter/vendor/smalot/pdfparser/src/Smalot/PdfParser/Parser.php on line 79

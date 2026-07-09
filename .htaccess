@@ -1,0 +1,101 @@
+# =======================
+# Base Apache Options
+# =======================
+Options -Indexes
+Options +FollowSymLinks
+Options -MultiViews
+DirectorySlash Off
+
+RewriteEngine On
+RewriteBase /
+
+# =======================
+# 1) Force HTTPS + non-www
+# =======================
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^(.*)$ https://tgdatahub.site/$1 [R=301,L]
+
+# =======================================================
+# Mark /tools/*/server/* so clean-redirect never touches it
+# =======================================================
+SetEnvIf Request_URI "^/tools/[^/]+/server/" NO_CLEAN=1
+
+# =======================================================
+# 2) Redirect .php/.html → clean URLs (NEVER for /tools/*/server/)
+#    - /about.php                 → /about
+#    - /tools/slug.php            → /tools/slug
+#    - /tools/slug/server/api.php → NO redirect (kept as .php)
+# =======================================================
+# PHP
+RewriteCond %{THE_REQUEST} \s+/(?!tools/[^/]+/server/)([^?\s]+)\.php(?:[\s?]) [NC]
+RewriteCond %{ENV:NO_CLEAN} !=1
+RewriteRule ^ %1 [R=301,L]
+
+# HTML
+RewriteCond %{THE_REQUEST} \s+/(?!tools/[^/]+/server/)([^?\s]+)\.html(?:[\s?]) [NC]
+RewriteCond %{ENV:NO_CLEAN} !=1
+RewriteRule ^ %1 [R=301,L]
+
+# ======================================
+# 3) Serve real files directly (no rewrite)
+# ======================================
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# =====================================================
+# 4) Root-level clean URLs → actual .php/.html (fallback)
+#    - /about → about.php (or about.html)
+# =====================================================
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^([^/]+)$ $1.php [L]
+
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^([^/]+)$ $1.html [L]
+
+# ============================================
+# 5) /tools/* trailing slash fix (prevent loop)
+#    - /tools/slug/ → /tools/slug
+# ============================================
+RewriteCond %{REQUEST_URI} ^/tools/.+/$
+RewriteRule ^tools/(.+?)/$ /tools/$1 [R=301,L]
+
+# ===================================================
+# 6) /tools/slug → index.php or index.html (no slash)
+# ===================================================
+RewriteCond %{REQUEST_FILENAME}/index.php -f
+RewriteRule ^tools/([^/]+)/?$ /tools/$1/index.php [L]
+
+RewriteCond %{REQUEST_FILENAME}/index.html -f
+RewriteRule ^tools/([^/]+)/?$ /tools/$1/index.html [L]
+
+# ==========================================================
+# 7) FORCE .php inside /tools/*/server/ when missing
+#    - /tools/slug/server/api        → 301 → /tools/slug/server/api.php (if exists)
+# ==========================================================
+RewriteCond %{DOCUMENT_ROOT}/tools/%1/server/%2.php -f
+RewriteRule ^tools/([^/]+)/server/([a-zA-Z0-9_-]+)$ /tools/%1/server/%2.php [R=301,L,QSA]
+
+# ==================================================================
+# 8) /tools/slug/* WITH extension → serve from /tools/slug/server/*
+#    - /tools/slug/data.json → /tools/slug/server/data.json (if exists)
+# ==================================================================
+RewriteCond %{DOCUMENT_ROOT}/tools/%1/server/%2.%3 -f
+RewriteRule ^tools/([^/]+)/([a-zA-Z0-9_-]+)\.([a-zA-Z0-9]+)$ /tools/%1/server/%2.%3 [L,QSA]
+
+# =====================================================================
+# 9) /tools/slug/* (extensionless) → /tools/slug/server/*.php (fallback)
+#    - /tools/slug/api → /tools/slug/server/api.php (if exists)
+#    (NOTE: This does NOT apply to /server/*; that's handled by rule 7)
+# =====================================================================
+RewriteCond %{DOCUMENT_ROOT}/tools/%1/server/%2.php -f
+RewriteRule ^tools/([^/]+)/([a-zA-Z0-9_-]+)$ /tools/%1/server/%2.php [L,QSA]
+
+RewriteEngine On
+
+# Sitemap.xml redirect to sitemap.php
+RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# This domain inherits the “PHP” package.
+# php -- END cPanel-generated handler, do not edit

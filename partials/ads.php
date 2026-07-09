@@ -1,8 +1,8 @@
 
 <?php
 // ==== Global Adsense Config ====
-// শুধু এখানে client ID change করতে হবে
-$adsense_client = "ca-pub-2106890018970230";
+
+$adsense_client = "ca-pub-xxxxxxxxxxxxxxx";
 
 /**
  * Helper function for showing ads

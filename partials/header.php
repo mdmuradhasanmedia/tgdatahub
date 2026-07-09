@@ -17,8 +17,8 @@ $current_url = $protocol . $domain . $_SERVER['REQUEST_URI'];
   <meta name="robots" content="index, follow">
   <meta name="author" content="TG Data Hub">
   <meta name="theme-color" content="#4f46e5"> <!-- Indigo accent for browsers -->
-  <meta name="google-adsense-account" content="ca-pub-2106890018970230">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2106890018970230"
+  <meta name="google-adsense-account" content="ca-pub-xxxxxxxxx">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-xxxxxxxxxxx"
      crossorigin="anonymous"></script>
   <!-- Canonical -->
   <link rel="canonical" href="<?= htmlspecialchars($canonical ?? $current_url) ?>" />
